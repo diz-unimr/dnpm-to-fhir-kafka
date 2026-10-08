@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '4.1.1'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'de.unimarburg.diz'
+version = '0.0.1-SNAPSHOT'
+description = 'dnpm-to-fhir-kafka'
+
+def mtbModel = '0.5.0'
+def dnpmToFhir = '0.1.0-SNAPSHOT'
+def hapiFhirVersion = '7.6.1'
+
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+repositories {
+    maven {
+        url = uri("https://git.dnpm.dev/api/packages/public-snapshots/maven")
+    }
+    maven {
+        url = uri("https://git.dnpm.dev/api/packages/public/maven")
+    }
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-kafka'
+    implementation("dev.pcvolkmer.mv64e:mtb-model:$mtbModel")
+    implementation("dev.pcvolkmer.onco:dnpm-to-fhir:$dnpmToFhir")
+    implementation("ca.uhn.hapi.fhir:hapi-fhir-base:${hapiFhirVersion}")
+    implementation("ca.uhn.hapi.fhir:hapi-fhir-structures-r4:${hapiFhirVersion}")
+    testImplementation 'org.springframework.boot:spring-boot-starter-kafka-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

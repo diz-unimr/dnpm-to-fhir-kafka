@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: dnpm-to-fhir-kafka
+
+  kafka:
+    bootstrapServers: ${BOOTSTRAP_SERVERS:localhost:9092}
+    security.protocol: ${SECURITY_PROTOCOL:PLAINTEXT}
+    consumer:
+      group-id: ${GROUP_ID:dnpm-to-fhir-kafka}
+    ssl:
+      trust-store-location: file://${SSL_TRUST_STORE_LOCATION:/opt/kafka-streams-template/ssl/truststore.jks}
+      trust-store-password: ${SSL_TRUST_STORE_PASSWORD}
+      key-store-location: file://${KAFKA_GENETIC_TO_MTB_XML_SSL_KEY_STORE_LOCATION:/opt/kafka-streams-template/ssl/keystore.jks}
+      key-store-password: ${KAFKA_GENETIC_TO_MTB_XML_SSL_KEY_STORE_PASSWORD}
+
+app:
+  input-topic: ${INPUT_TOPIC:dnpm}
+  output-topic: ${OUTPUT_TOPIC:dnpm-fhir}
