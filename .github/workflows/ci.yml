@@ -58,7 +58,7 @@ jobs:
           docker push ghcr.io/${{ github.repository }}
           docker push ghcr.io/${{ github.repository }}:${{ github.ref_name }}
       - name: Deploy preview image
-        if: ${{ github.ref == 'refs/heads/master' }}
+        if: ${{ github.ref == 'refs/heads/main' }}
         run: |
           docker tag ghcr.io/${{ github.repository }} ghcr.io/${{ github.repository }}:preview
           docker push ghcr.io/${{ github.repository }}:preview
