@@ -5,5 +5,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "app")
 public class AppConfigurationProperties {
     String inputTopic;
-    String outputTopic;
+    String outputTopic = "fhir-mv64-output";
 }
