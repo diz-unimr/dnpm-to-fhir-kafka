@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 
 @SpringBootApplication
 @EnableConfigurationProperties(AppConfigurationProperties.class)
+@EnableKafka
 public class Application {
     static Logger log = LoggerFactory.getLogger(Application.class);
 
@@ -52,7 +54,8 @@ public class Application {
             final var patientRecord = Converter.fromJsonString(record.value());
             final var bundle = mapper.mapToBundle(patientRecord);
             final var bundleJson = fhirJsonParser.encodeResourceToString(bundle);
-            kafkaTemplate.send(appConfigurationProperties.outputTopic, bundleJson);
+            kafkaTemplate.send(appConfigurationProperties.outputTopic, record.key(), bundleJson);
+            log.info("Sent record for '{}'", record.key());
         } catch (Exception e) {
             log.error("Error handling record for '{}'", record.key(), e);
         }
