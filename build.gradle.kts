@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "de.unimarburg.diz"
-version = "0.0.1-SNAPSHOT" // x-release-please-version
+version = "0.0.2" // x-release-please-version
 description = "dnpm-to-fhir-kafka"
 
 val mtbModel = "0.6.4"
