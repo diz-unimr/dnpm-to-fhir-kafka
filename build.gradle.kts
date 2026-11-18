@@ -11,7 +11,7 @@ version = "0.0.2" // x-release-please-version
 description = "dnpm-to-fhir-kafka"
 
 val mtbModel = "0.6.4"
-val dnpmToFhir = "0.1.0-SNAPSHOT"
+val dnpmToFhir = "0.1.1"
 val hapiFhirVersion = "7.6.1"
 
 
