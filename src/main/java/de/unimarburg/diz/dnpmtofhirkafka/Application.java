@@ -45,7 +45,7 @@ public class Application {
         // Build patient record mapper for DIZ Uni-Marburg
         final var filters = new ArrayList<Filter<?>>();
         filters.add(new AtcCodeFilter());
-        this.mapper = PatientRecordMapper.customInstance(new DizUniMrReferenceBuilder(), filters);
+        this.mapper = PatientRecordMapper.customInstance(new DizUniMrReferenceBuilder(), filters, false);
     }
 
     @KafkaListener(topics = "${app.input-topic}")
